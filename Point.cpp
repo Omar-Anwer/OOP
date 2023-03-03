@@ -1,8 +1,6 @@
 #include <iostream>
 #include <stdio.h>
-#include <string.h>
 #include <math.h>
-
 
 using namespace std;
 
@@ -123,13 +121,12 @@ public:
         return (m);
     }
     
-     static double getDistance(const Point &p, const Point &q)
+      static double getDistance(const Point &p, const Point &q)
     {
         double distance;
-        distance  = (p.x - q.x) * (p.x - q.x);
-        distance += (p.y - q.y) * (p.y - q.y);
-        
-        return (sqrt(distance));
+        distance  = sqrt (  (p.x - q.x) * (p.x - q.x)
+                          + (p.y - q.y) * (p.y - q.y) );
+        return (distance);
     }
 
     
