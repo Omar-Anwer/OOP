@@ -54,7 +54,8 @@ public:
     }
     
     //operator overloading
-    Point operator + (const Point &p){
+    Point operator + (const Point &p)
+    {
         Point tmp;
         tmp.x = this->x + p.x;
         tmp.y = this->y + p.y;
@@ -62,7 +63,8 @@ public:
         return (tmp);
     }
     
-    Point operator - (const Point &p){
+    Point operator - (const Point &p)
+    {
         Point tmp;
         tmp.x = this->x - p.x;
         tmp.y = this->y - p.y;
@@ -70,7 +72,8 @@ public:
         return (tmp);
     }
     
-    Point operator * (const Point &p){
+    Point operator * (const Point &p)
+    {
         Point tmp;
         tmp.x = this->x * p.x;
         tmp.y = this->y * p.y;
@@ -78,18 +81,41 @@ public:
         return (tmp);
     }
     
-    bool operator == (const Point &p){
+    bool operator == (const Point &p) const
+    {
         
         return ( (this->x == p.x) && (this->y == p.y) );
     }
     
+    Point operator + (int num)
+    {
+         // point + 10
+         Point p;
+         p.x = this->x + num;
+         p.y = this->y + num;
+         
+         return (p);
+    }
+    
+    friend Point operator+(int num, const Point &p)
+      {
+        // 10 + point
+        Point tmp;
+        tmp.x = p.x + num;
+        tmp.y = p.y + num;
+        
+        return (tmp);
+    }
+    
     
     // Methods
-    void disp(void) const{
+    void disp(void) const
+    {
         printf("(%lf, %lf) \n", this->x, this->y);
     }
     
-     static Point midPoint(const Point &p, const Point &q){
+     static Point midPoint(const Point &p, const Point &q)
+    {
         Point m;
         m.x = (p.x + q.x) / 2;
         m.y = (p.y + q.y) / 2;
@@ -97,16 +123,19 @@ public:
         return (m);
     }
     
-     static double getDistance(const Point &p, const Point &q){
+     static double getDistance(const Point &p, const Point &q)
+    {
         double distance;
         distance  = (p.x - q.x) * (p.x - q.x);
         distance += (p.y - q.y) * (p.y - q.y);
         
-        return ( sqrt(distance) );
+        return (sqrt(distance));
     }
 
     
 };
+
+    
 
 int main()
 {
@@ -125,7 +154,10 @@ int main()
     {
         cout <<"equal points"<<"\n";
     }
-    
+    Point t = 3 + o;
+    t.disp();
+    t = t + 2;
+    t.disp();
     
     return 0;
 }
