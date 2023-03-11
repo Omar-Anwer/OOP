@@ -1,6 +1,8 @@
 #include <iostream>
 #include <stdio.h>
+#include <string.h>
 #include <math.h>
+
 
 using namespace std;
 
@@ -52,8 +54,7 @@ public:
     }
     
     //operator overloading
-    Point operator + (const Point &p)
-    {
+    Point operator + (const Point &p){
         Point tmp;
         tmp.x = this->x + p.x;
         tmp.y = this->y + p.y;
@@ -61,8 +62,7 @@ public:
         return (tmp);
     }
     
-    Point operator - (const Point &p)
-    {
+    Point operator - (const Point &p){
         Point tmp;
         tmp.x = this->x - p.x;
         tmp.y = this->y - p.y;
@@ -70,8 +70,7 @@ public:
         return (tmp);
     }
     
-    Point operator * (const Point &p)
-    {
+    Point operator * (const Point &p){
         Point tmp;
         tmp.x = this->x * p.x;
         tmp.y = this->y * p.y;
@@ -79,41 +78,26 @@ public:
         return (tmp);
     }
     
-    bool operator == (const Point &p) const
-    {
+    bool operator == (const Point &p){
         
         return ( (this->x == p.x) && (this->y == p.y) );
     }
     
-    Point operator + (int num)
-    {
-         // point + 10
-         Point p;
-         p.x = this->x + num;
-         p.y = this->y + num;
-         
-         return (p);
-    }
-    
-    friend Point operator+(int num, const Point &p)
-      {
-        // 10 + point
-        Point tmp;
-        tmp.x = p.x + num;
-        tmp.y = p.y + num;
-        
-        return (tmp);
-    }
-    
     
     // Methods
-    void disp(void) const
-    {
+    void disp(void) const{
         printf("(%lf, %lf) \n", this->x, this->y);
     }
-    
-     static Point midPoint(const Point &p, const Point &q)
+	
+	// to print a Point object using cout << point << endl;
+	 friend ostream& operator << (ostream& os, const Point& p)
     {
+        os << "(" << p.x << ", " << p.y << ")"; 
+        return os;
+    }
+     
+    // some static methods
+     static Point midPoint(const Point &p, const Point &q){
         Point m;
         m.x = (p.x + q.x) / 2;
         m.y = (p.y + q.y) / 2;
@@ -121,40 +105,36 @@ public:
         return (m);
     }
     
-      static double getDistance(const Point &p, const Point &q)
-    {
+     static double getDistance(const Point &p, const Point &q){
         double distance;
-        distance  = sqrt (  (p.x - q.x) * (p.x - q.x)
-                          + (p.y - q.y) * (p.y - q.y) );
-        return (distance);
+        distance  = sqrt(   (p.x - q.x) * (p.x - q.x)
+				          + (p.y - q.y) * (p.y - q.y) );
+        
+        return ( distance );
     }
 
     
 };
 
-    
-
 int main()
 {
     
-    Point o, p{3, 2}, q(7, 8), r(q);
+    Point o, p{3, 2}, q(7, 8), r(q), v{r};
     
     Point x = p * q;
-    x.disp();
+   // x.disp();a
+   cout << x << endl;
     
     Point m = Point::midPoint(p, q);
-    m.disp();
+   // m.disp();
+   cout << m << endl;
     
     cout << Point::getDistance(p, q) << "\n";
     
-    if(r == q)
-    {
+    if(r == q){
         cout <<"equal points"<<"\n";
     }
-    Point t = 3 + o;
-    t.disp();
-    t = t + 2;
-    t.disp();
+    
     
     return 0;
 }
